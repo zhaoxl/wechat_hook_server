@@ -31,7 +31,7 @@ module API
                 when 3 then #图片
                   md5 = params[:content].match(/md5="(.+)"/)[1] rescue nil
                   Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: params[:msg_type].to_i, raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
-                when 419430449 then #转账
+                else
                   msg = Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: params[:msg_type].to_i, raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
               end
               
@@ -120,6 +120,29 @@ module API
           end
         end
         
+        desc "记录红包状态"
+        params do
+          requires :unique_id, type: String, desc: "设备ID"
+          requires :hb_status, type: String, desc: "红包状态"
+          requires :hb_type, type: String, desc: "红包类型"
+          requires :receive_status, type: String, desc: "领取状态"
+          requires :receive_time, type: Integer, desc: "时间戳"
+          requires :receive_amount, type: Integer, desc: "收到金额(分)"
+          optional :content, type: String, desc: "详细内容"
+          optional :sendusername, type: String, desc: "发送人"
+        end
+        post "add_wallet_lucky_money_record" do
+          begin
+            if device = Device.find_by(unique_id: params[:unique_id])
+              talker = params[:sendusername]
+              WalletLuckyMoney.create(device: device, talker: talker, hb_status: params[:hb_status], hb_type: params[:hb_type], receive_status: params[:receive_status], receive_time: params[:receive_time], receive_amount: params[:receive_amount], content: params[:content])
+            end
+            
+            present({result: "OK"})
+          rescue ActiveRecord::RecordNotFound => ex
+            app_uuid_error("#{__FILE__}:#{__LINE__}")
+          end
+        end
         
       end
     end

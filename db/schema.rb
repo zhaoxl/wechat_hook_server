@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_02_051332) do
+ActiveRecord::Schema.define(version: 2018_10_02_141319) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -72,6 +72,20 @@ ActiveRecord::Schema.define(version: 2018_10_02_051332) do
     t.datetime "updated_at", null: false
     t.index ["device_id"], name: "index_remittance_records_on_device_id"
     t.index ["message_id"], name: "index_remittance_records_on_message_id"
+  end
+
+  create_table "wallet_lucky_moneys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "device_id"
+    t.string "talker"
+    t.string "hb_status"
+    t.string "hb_type"
+    t.string "receive_status"
+    t.bigint "receive_time"
+    t.bigint "receive_amount"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_wallet_lucky_moneys_on_device_id"
   end
 
 end
