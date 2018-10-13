@@ -1,0 +1,94 @@
+<%= content_for :javascripts do%>
+  <%= stylesheet_link_tag    'adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    微信账号
+    <small>所有账号</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+    <li class="active">微信账号</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+              <div class="col-sm-6"></div>
+              <div class="col-sm-6"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                  <thead>
+                    <tr role="row">
+                      <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">ID</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">微信号</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">最后登录时间</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">状态</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @datas.each do |data|%>
+                    <tr data-preview_modal="<%= data.id%>" data-show_path="<%= wx_account_path(data)%>" role="row" class="odd">
+                      <td class="sorting_1"><%= data.id%></td>
+                      <td class=""><%= data.account%></td>
+                      <td>2018-01-01 12:25:12</td>
+                      <td>正常</td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                  
+                </table>
+              </div>
+            </div>
+            <%= chaos_paginate @datas%>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="preview_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">预览</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="show_btn btn btn-default">查看详情</a>
+        <a href="#" class="btn btn-primary">编辑</a>
+        <a href="#" class="btn btn-danger">删除</a>
+      </div>
+    </div>
+  </div>
+</div>
+<%= content_for :init do%>
+
+  <script>
+    $(function(){
+      $("tr[data-preview_modal]").click(function(){
+        $("#preview_modal").modal("show");
+        var _show_path = $(this).attr("data-show_path");
+        $("#preview_modal .show_btn").attr("href", _show_path);
+      });
+    });
+  </script>
+<% end %>

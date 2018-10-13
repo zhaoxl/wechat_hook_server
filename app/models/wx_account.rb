@@ -1,0 +1,2 @@
+class WxAccount < ApplicationRecord
+end

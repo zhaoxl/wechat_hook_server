@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'index#index'
   
   mount ::ApiBase, at: '/api'
   mount GrapeSwaggerRails::Engine => '/api/swagger'
   
   resources :application
+  resources :index
+  resources :devices
+  resources :wx_accounts do
+    member do
+      get :messages
+    end
+  end
+  
+  
 end

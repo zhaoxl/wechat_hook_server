@@ -21,6 +21,7 @@ module API
       end
 
       mount MessagesApi
+      mount DevicesApi
       
     end
   end

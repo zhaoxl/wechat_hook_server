@@ -63,6 +63,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #图片组件
 gem 'mini_magick', '4.8.0'
 gem 'carrierwave', '1.2.1'
+#页面debug工具
+gem 'better_errors', '2.4.0'
+gem 'binding_of_caller', '0.7.3'
 #DEBUG工具
 gem 'pry_debug'
 gem 'pry-nav'
@@ -75,3 +78,8 @@ gem 'grape_on_rails_routes'
 gem 'grape-swagger-rails'
 #数据库
 gem 'mysql2', '0.5.2'
+#用户
+gem 'devise'
+#翻页插件
+gem 'will_paginate', '3.1.6'
+gem 'will_paginate-bootstrap', '1.0.1'
