@@ -18,7 +18,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h2 class="page-header">
-        <i class="fa fa-globe"></i> <%= @data.account%>
+        <i class="fa fa-globe"></i> <%= @data.wx_id%>
         <small class="pull-right">Date: <%= @data.last_active_at%></small>
       </h2>
     </div>
@@ -70,7 +70,7 @@
           <ul class="users-list clearfix">
             <li>
               <img src="/AdminLTE-2.4.5/dist/img/user1-128x128.jpg" alt="User Image">
-              <a class="users-list-name" href="#">Alexander Pierce</a>
+              <a class="users-list-name" href="<%= wx_account_friend_path(@data, 1)%>">Alexander Pierce</a>
               <span class="users-list-date">Today</span>
             </li>
             <li>

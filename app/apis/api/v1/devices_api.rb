@@ -9,7 +9,7 @@ module API
         get "get_account" do
           begin
             if device = Device.find_by(unique_id: params[:unique_id])
-              present({result: "OK", wx_account: device.wx_account, wx_pwd: device.wx_pwd})
+              present({result: "OK", wx_id: device.wx_id, wx_pwd: device.wx_pwd})
             else
               present({result: "DEVICE_NOT_FOUND"})
             end

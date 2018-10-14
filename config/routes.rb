@@ -8,9 +8,7 @@ Rails.application.routes.draw do
   resources :index
   resources :devices
   resources :wx_accounts do
-    member do
-      get :messages
-    end
+    resources :friends
   end
   
   

@@ -30,9 +30,9 @@ module API
               case params[:msg_type].to_i
                 when 3 then #图片
                   md5 = params[:content].match(/md5="(.+)"/)[1] rescue nil
-                  Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: params[:msg_type].to_i, raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
+                  Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: Message.convert_msg_type(params[:msg_type].to_i), raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
                 else
-                  msg = Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: params[:msg_type].to_i, raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
+                  msg = Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: Message.convert_msg_type(params[:msg_type].to_i), raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
               end
               
             end

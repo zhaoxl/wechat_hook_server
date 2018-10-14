@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_13_043857) do
+ActiveRecord::Schema.define(version: 2018_10_14_133949) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2018_10_13_043857) do
     t.integer "wx_account_id"
   end
 
+  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "account_id"
+    t.string "wx_id"
+    t.string "nickname"
+    t.string "avator"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "device_id"
     t.string "talker"
@@ -58,6 +67,8 @@ ActiveRecord::Schema.define(version: 2018_10_13_043857) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "msg_id"
+    t.integer "friend_id"
+    t.integer "wx_account_id"
   end
 
   create_table "remittance_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -91,7 +102,7 @@ ActiveRecord::Schema.define(version: 2018_10_13_043857) do
   end
 
   create_table "wx_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "account"
+    t.string "wx_id"
     t.string "pwd"
     t.string "state"
     t.datetime "created_at", null: false
