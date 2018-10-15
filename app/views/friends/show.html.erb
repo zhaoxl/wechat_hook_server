@@ -35,36 +35,32 @@
           <h3 class="box-title">聊天记录</h3>
 
           <div class="box-tools pull-right">
-            <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts">
-              <i class="fa fa-comments"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-            </button>
           </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body" style="">
           <!-- Conversations are loaded here -->
           <div class="direct-chat-messages">
-			<%@messages.each do |message|%>
+			      <%@messages.each do |message|%>
             <!-- Message. Default to the left -->
             <div class="direct-chat-msg <%= message.is_send? ? "right" : ""%>">
               <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                <span class="direct-chat-name pull-left"><%= @friend.nickname%></span>
+                <span class="direct-chat-timestamp pull-right"><%= message.created_at.to_s%></span>
               </div>
               <!-- /.direct-chat-info -->
               <img class="direct-chat-img" src="/AdminLTE-2.4.5/dist/img/user1-128x128.jpg" alt="message user image">
               <!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 <%= message.content%>
+                <%if message.msg_type == "image"%>
+                  <img src="<%= message.image.path%>" height="100px"/>
+                <% end %>
               </div>
               <!-- /.direct-chat-text -->
             </div>
             <!-- /.direct-chat-msg -->
-			<%end%>
+			      <%end%>
           </div>
           <!--/.direct-chat-messages-->
 

@@ -46,7 +46,9 @@
                       <td class=""><%= data.unique_id%></td>
                       <td class="sorting_1"><%= data.client_version%></td>
                       <td>2018-01-01 12:25:12</td>
-                      <td><%= data.wx_id%></td>
+                      <td>
+                        <%= link_to_if data.wx_account, data.wx_account.try(:wx_id) || "无", wx_account_path(data.wx_account)%>
+                      </td>
                       <td>正常</td>
                     </tr>
                     <% end %>

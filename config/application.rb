@@ -15,5 +15,13 @@ module WechatHookServer
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    
+
+    #默认时间格式
+    ::Time::DATE_FORMATS[:default] = "%Y-%m-%d %H:%M:%S"
+    #纯年月日格式
+    ::Time::DATE_FORMATS[:sort] = "%Y-%m-%d"
+    #数字格式
+    ::Time::DATE_FORMATS[:d] = "%Y%m%d"
   end
 end

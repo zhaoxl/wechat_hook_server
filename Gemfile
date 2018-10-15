@@ -85,3 +85,5 @@ gem 'will_paginate', '3.1.6'
 gem 'will_paginate-bootstrap', '1.0.1'
 #枚举插件
 gem 'enumerize', '2.1.2'
+#状态机
+gem 'aasm', '4.12.3'

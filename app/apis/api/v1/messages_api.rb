@@ -24,17 +24,17 @@ module API
             p "create_time:"+params[:create_time].to_s
             p "is_send:"+params[:is_send].to_s
             
-            
-            if device = Device.find_by(unique_id: params[:unique_id])
-              #如果是资源则获取MD5
-              case params[:msg_type].to_i
-                when 3 then #图片
-                  md5 = params[:content].match(/md5="(.+)"/)[1] rescue nil
-                  Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: Message.convert_msg_type(params[:msg_type].to_i), raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
-                else
-                  msg = Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: Message.convert_msg_type(params[:msg_type].to_i), raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
+            if [1, 34, 3, 436207665, 419430449].include?(params[:msg_type].to_i)
+              if device = Device.find_by(unique_id: params[:unique_id])
+                #如果是资源则获取MD5
+                case params[:msg_type].to_i
+                  when 3 then #图片
+                    md5 = params[:content].match(/md5="(.+)"/)[1] rescue nil
+                    Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: Message.convert_msg_type(params[:msg_type].to_i), raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
+                  else
+                    msg = Message.create!(msg_id: params[:msg_id], device_id: device.id, talker: params[:talker], msg_type: Message.convert_msg_type(params[:msg_type].to_i), raw: params[:raw], content: params[:content], create_time: params[:create_time].to_i, is_send: params[:is_send]==1, md5: md5)
+                end
               end
-              
             end
             
             present({result: "OK"})

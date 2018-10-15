@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'index#index'
+  root 'devices#index'
   
   mount ::ApiBase, at: '/api'
   mount GrapeSwaggerRails::Engine => '/api/swagger'
